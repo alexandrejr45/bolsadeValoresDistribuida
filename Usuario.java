@@ -1,4 +1,9 @@
-public class Usuario {
+import java.io.*;
+import java.util.*;
+import java.rmi.*;
+
+
+public class Usuario implements Serializable {
 
     private String nome;
     private double lance;
@@ -31,7 +36,7 @@ public class Usuario {
       return this.lance;
     }
 
-    public void SetSaldo(Double saldo){
+    public void setSaldo(Double saldo){
       this.saldo = saldo;
     }
 

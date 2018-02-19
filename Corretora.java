@@ -1,34 +1,55 @@
+import java.io.*;
 import java.util.*;
+import java.rmi.*;
 
-public class Corretora{
-    private static Corretora Corretora;
 
-    private Corretora(){}
+public class Corretora implements Serializable{
+    private static Corretora corretora;
+    private Corretora(){};
 
-    private static ArrayList<Cliente> clientes = new ArrayList<>();
+    private static ArrayList<Usuario> lista = new ArrayList<Usuario>();
+    private static ArrayList<Lance> lances = new ArrayList<Lance>();
 
-        public static void setClientes(Cliente cliente){
-             clientes.add(cliente);
+    public static Corretora getInstancia(){
+      if (Corretora.corretora == null) {
+            Corretora.corretora = new Corretora();
         }
-
-    public static void main(String args[]){
-        Scanner valor = new Scanner(System.in);
-
-        Cliente cliente = new Cliente();
-
-        System.out.println("Qual seu nome? ");
-        cliente.setNome(valor.next());
-
-        System.out.println("Você deseja comprar ou vender? ");
-        cliente.setStatus(valor.next());
-
-        System.out.println("Qual o seu lance? ");
-        cliente.setLance(valor.nextDouble());
-
-        Corretora.setClientes(cliente);
-
-
+        return corretora;
     }
 
+    public static boolean adicionarCliente(Usuario cliente){
+        if(cliente != null){
+          lista.add(cliente);
+        }
+
+        return true;
+    }
+
+    public ArrayList retornaLista(){
+      return this.lista;
+    }
+
+    public void mostraClientes(ArrayList clientes){
+      Usuario p;
+      System.out.println ("Numero de clientes cadastrados: " + clientes.size());
+      for (int i=0; i < clientes.size(); i++) {
+        p = (Usuario) clientes.get(i);
+        System.out.println ("--------------------------------------------");
+        System.out.println ("Loops = ");
+        System.out.println (p.getNome() + "," + p.getLance());
+
+      }
+    }
+
+    public static boolean adicionarLance(Lance lance){
+      if(lance != null){
+        lances.add(lance);
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    
 
 }

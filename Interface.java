@@ -6,5 +6,13 @@ import javax.swing.*;
 import java.rmi.*;
 
 public interface Interface extends Remote{
-    public boolean registraCliente(Cliente cliente);
+    public boolean registraCliente(Usuario cliente)
+    throws java.rmi.RemoteException;
+
+    public ArrayList retornaClientes()
+    throws java.rmi.RemoteException;
+
+    public ArrayList registrarLance()
+    throws java.rmi.RemoteException;
+
 }
