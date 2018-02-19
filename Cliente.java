@@ -18,10 +18,10 @@ public class Cliente {
       String status = null;
       String verifica = null;
 
-      System.out.println("Qual o seu nome?");
+      System.out.println("Qual o seu nome? ");
       user.setNome(valor.next());
 
-      System.out.println("Qual o seu saldo atual?");
+      System.out.println("Qual o seu saldo atual? ");
       user.setSaldo(valor.nextDouble());
 
       System.out.println("Procurando objeto cadastro no servidor...");
@@ -45,7 +45,9 @@ public class Cliente {
 
       } while (verifica.equals("Sim"));
 
-      
+
+      ArrayList lances = inter.retornaLancesUsuario(user);
+      core.mostraLances(lances);
 
 
       // System.out.println("Você deseja comprar ou vender?");
@@ -53,22 +55,22 @@ public class Cliente {
 
       // System.out.println("Você deseja buscar clientes?");
       // status = valor.next();
-
-      if(status.equals("S")){
-        do {
-          ArrayList clientes = inter.retornaClientes();
-
-          core.mostraClientes(clientes);
-
-          System.out.println("Você deseja buscar clientes?");
-          status = valor.next();
-
-        } while (status.equals("S"));
-      }
-
-      if(resposta == true){
-        System.out.println("Cliente Cadastrado");
-      }
+      //
+      // if(status.equals("S")){
+      //   do {
+      //     ArrayList clientes = inter.retornaClientes();
+      //
+      //     core.mostraClientes(clientes);
+      //
+      //     System.out.println("Você deseja buscar clientes?");
+      //     status = valor.next();
+      //
+      //   } while (status.equals("S"));
+      // }
+      //
+      // if(resposta == true){
+      //   System.out.println("Cliente Cadastrado");
+      // }
 
     }catch (Exception e) {
       System.out.println("ERROR: "+ e);

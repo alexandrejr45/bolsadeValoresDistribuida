@@ -12,7 +12,10 @@ public interface Interface extends Remote{
     public ArrayList retornaClientes()
     throws java.rmi.RemoteException;
 
-    public ArrayList registrarLance()
+    public boolean registrarLance(Lance lance)
     throws java.rmi.RemoteException;
 
+
+    public ArrayList<Lance> retornaLancesUsuario(Usuario user)
+    throws java.rmi.RemoteException;
 }

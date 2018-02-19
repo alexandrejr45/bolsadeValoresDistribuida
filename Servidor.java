@@ -58,6 +58,18 @@ public class Servidor extends UnicastRemoteObject implements Interface{
     }
   }
 
+  public ArrayList<Lance> retornaLancesUsuario(Usuario user) throws RemoteException{
+      System.out.println("Servidor recebeu uma chamada para listar os lances ");
+
+      try{
+          return corretora.retornaLancesSaldo(user);
+
+      }catch (Exception e) {
+        e.printStackTrace();
+        return null;
+      }
+  }
+
   public static void main(String args[]) {
 
     try{

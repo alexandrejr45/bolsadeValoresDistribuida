@@ -36,7 +36,19 @@ public class Corretora implements Serializable{
         p = (Usuario) clientes.get(i);
         System.out.println ("--------------------------------------------");
         System.out.println ("Loops = ");
-        System.out.println (p.getNome() + "," + p.getLance());
+        System.out.println (p.getNome());
+
+      }
+    }
+
+    public void mostraLances(ArrayList lances){
+      Lance p;
+      System.out.println ("Numero de lances cadastrados: " + lances.size());
+      for (int i=0; i < lances.size(); i++) {
+        p = (Lance) lances.get(i);
+        System.out.println ("--------------------------------------------");
+        System.out.println ("Lance do Usuario = " + p.getUsuario().getNome());
+        System.out.println ("Valor do Lance = " + p.getValor());
 
       }
     }
@@ -50,6 +62,27 @@ public class Corretora implements Serializable{
       }
     }
 
-    
+    public ArrayList<Lance> retornaLances(){
+      return this.lances;
+    }
+
+    public ArrayList<Lance> retornaLancesSaldo(Usuario usuario){
+      ArrayList<Lance> listaFinal = new ArrayList<Lance>();
+      ArrayList<Lance> lances = retornaLances();
+      Lance p;
+
+
+      for(int i = 0; i < lances.size(); i++){
+         p = (Lance) lances.get(i);
+        if(p.getValor() <= usuario.getSaldo()){
+          listaFinal.add(p);
+        }
+      }
+
+      return listaFinal;
+
+    }
+
+
 
 }
