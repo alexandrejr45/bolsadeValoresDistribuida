@@ -84,5 +84,17 @@ public class Servidor extends UnicastRemoteObject implements Interface{
 
     System.out.println("Pronto para receber chamadas RMI...");
 
+    try{
+      System.out.println("Criando o objeto servidor servidor...");
+      Servidor servidor = new Servidor(); // cria um objeto
+      System.out.println("Conectando o objeto cadastro no Registry...");
+      Naming.rebind("rmi:///cadastro", servidor); // registra o objeto forn como "produto"
+
+    } catch (Exception e) {
+      System.out.println("Servidor.main: " + e);
+    }
+
+    System.out.println("Pronto para receber chamadas RMI...");
+
   }
 }
