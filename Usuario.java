@@ -11,6 +11,7 @@
     private String status;
     private int idade;
     private Random gerador = new Random();
+    private int hash;
 
 
     public void setStatus(String status){
@@ -45,13 +46,17 @@
       return this.saldo;
     }
 
-    public int geraHash(){
+    public void geraHash(){
       g = this.gerador;
-      
+
       int valor = g.nextInt();
+      this.hash = valor;
 
-      return valor;
+    }
 
+    public int getHash(){
+
+      return this.hash;
     }
 
 
