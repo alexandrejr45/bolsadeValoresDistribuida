@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.rmi.*;
 
 public class Cliente {
-  public static void main(String args[]) {
+  public static void main(String args[]) throws Exception{
 
     try {
 
@@ -28,53 +28,65 @@ public class Cliente {
 
       System.out.println("Procurando objeto cadastro no servidor...");
 
-      Interface inter = (Interface) Naming.lookup("rmi:///cadastro");
+      Interface inter = (Interface) Naming.lookup("rmi:///cadastrojj");
       boolean resposta = inter.registraCliente(user);
 
-      do {
-        System.out.println("Você deseja dar um lance?");
-        verifica = valor.next();
+      System.out.println("Você deseja dar um lance?");
+      verifica = valor.next();
 
-        if (verifica.equals("Sim")) {
+      if (verifica.equals("Sim")) {
 
-          System.out.println("Qual o valor do lance?");
-          valorLance = valor.nextDouble();
+        System.out.println("Qual o valor do lance?");
+        valorLance = valor.nextDouble();
 
-          Lance l = new Lance(user, valorLance);
-          boolean resposta2 = inter.registrarLance(l);
+        Lance l = new Lance(user, valorLance);
+        boolean resposta2 = inter.registrarLance(l);
 
-        }
-
-      } while (verifica.equals("Sim"));
-
+      }
+        
       ArrayList<Lance> lances = inter.retornaLancesUsuario(user);
       core.mostraLances(lances);
-        
 
-  //     System.out.println("Você deseja comprar ou vender?");
-  //     user.setStatus(valor.next());
+      // System.out.println("Você deseja comprar ou vender?");
+      // user.setStatus(valor.next());
 
-  //     System.out.println("Você deseja buscar clientes?");
-  //     status = valor.next();
-      
-  //     if(status.equals("S")){
-  //       do {
-  //         ArrayList<Usuario> clientes = inter.retornaClientes();
-      
-  //         core.mostraClientes(clientes);
-      
-  //         System.out.println("Você deseja buscar clientes?");
-  //         status = valor.next();
-      
-  //       } while (status.equals("S"));
-  //     }
-      
-  //     if(resposta == true){
-  //       System.out.println("Cliente Cadastrado");
-  //     }
+      // System.out.println("Você deseja buscar clientes?");
+      // status = valor.next();
 
-    } catch (Exception e) {
-      System.out.println("ERROR: " + e);
+      // if(status.3equals("S")){
+      //   do {
+      //     ArrayList<Usuario> clientes = inter.retornaClientes();
+
+      //     core.mostraClientes(clientes);
+
+      //     System.out.println("Você deseja buscar clientes?");
+      //     status = valor.next();
+
+      //   } while (status.equals("S"));
+      // }
+
+      // if(resposta == true){
+      //   System.out.println("Cliente Cadastrado");
+      // }
+
+    } catch (NotBoundException e) {
+      Scanner valor2 = new Scanner(System.in);
+
+      Usuario user2 = new Usuario();
+      
+      System.out.println("Qual o seu nome? ");
+      user2.setNome(valor2.nextLine());
+
+      System.out.println("Qual o seu saldo atual? ");
+      user2.setSaldo(valor2.nextDouble());
+
+      user2.geraHash();
+
+      System.out.println("Procurando objeto cadastro no servidor...");
+
+      Interface inter = (Interface) Naming.lookup("rmi:///cadastro");
+      boolean resposta2 = inter.registraCliente(user2);
+
     }
 
   }

@@ -7,7 +7,6 @@ public class Usuario implements Serializable {
   private String nome;
   private double saldo;
   private String status;
-  private int idade;
   private Random gerador = new Random();
   private int hash;
 
