@@ -47,12 +47,7 @@ public class Cliente {
 
       } while (verifica.equals("Sim"));
 
-      ArrayList<Lance> lances = inter.retornaLancesUsuario(user);
-      if(lances.isEmpty()){
-        core.mostraLances(lances);        
-      }else{
-        System.out.println("Somente o seus lances foram cadastrados no momento");
-      }
+      
         
 
   //     System.out.println("Você deseja comprar ou vender?");
