@@ -1,63 +1,62 @@
-  import java.io.*;
-  import java.util.*;
-  import java.rmi.*;
+import java.io.*;
+import java.util.*;
+import java.rmi.*;
 
+public class Usuario implements Serializable {
 
-  public class Usuario implements Serializable {
+  private String nome;
+  private double lance;
+  private double saldo;
+  private String status;
+  private int idade;
+  private Random gerador = new Random();
+  private int hash;
 
-    private String nome;
-    private double lance;
-    private double saldo;
-    private String status;
-    private int idade;
-    private Random gerador = new Random();
-    private int hash;
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
+  public String getStatus() {
+    return this.status;
+  }
 
-    public void setStatus(String status){
-        this.status = status;
-    }
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
 
-    public String getStatus(){
-        return this.status;
-    }
+  public String getNome() {
+    return this.nome;
+  }
 
-    public void setNome(String nome){
-        this.nome = nome;
-    }
+  public void setLance(Double lance) {
+    this.lance = lance;
+  }
 
-    public String getNome(){
-        return this.nome;
-    }
+  public Double getLance() {
+    return this.lance;
+  }
 
-    public void setLance(Double lance){
-      this.lance = lance;
-    }
+  public void setSaldo(Double saldo) {
+    this.saldo = saldo;
+  }
 
-    public Double getLance(){
-      return this.lance;
-    }
+  public Double getSaldo() {
+    return this.saldo;
+  }
 
-    public void setSaldo(Double saldo){
-      this.saldo = saldo;
-    }
+  public void geraHash() {
+    Random g;
 
-    public Double getSaldo(){
-      return this.saldo;
-    }
+    g = this.gerador;
 
-    public void geraHash(){
-      g = this.gerador;
-
-      int valor = g.nextInt();
-      this.hash = valor;
-
-    }
-
-    public int getHash(){
-
-      return this.hash;
-    }
-
+    int valor = g.nextInt();
+    this.hash = valor;
 
   }
+
+  public int getHash() {
+
+    return this.hash;
+  }
+
+}

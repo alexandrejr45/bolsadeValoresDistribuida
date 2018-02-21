@@ -5,9 +5,9 @@ import javax.swing.*;
 import java.rmi.*;
 
 public class Cliente {
-  public static void main (String args[]){
+  public static void main(String args[]) {
 
-    try{
+    try {
 
       Scanner valor = new Scanner(System.in);
 
@@ -26,14 +26,14 @@ public class Cliente {
 
       System.out.println("Procurando objeto cadastro no servidor...");
 
-      Interface inter = (Interface)Naming.lookup("rmi:///cadastro");
+      Interface inter = (Interface) Naming.lookup("rmi:///cadastro");
       boolean resposta = inter.registraCliente(user);
 
       do {
         System.out.println("Você deseja dar um lance?");
         verifica = valor.next();
 
-        if(verifica.equals("Sim")){
+        if (verifica.equals("Sim")) {
 
           System.out.println("Qual o valor do lance?");
           valorLance = valor.nextDouble();
@@ -45,10 +45,8 @@ public class Cliente {
 
       } while (verifica.equals("Sim"));
 
-
-      ArrayList lances = inter.retornaLancesUsuario(user);
+      ArrayList<Lance> lances = inter.retornaLancesUsuario(user);
       core.mostraLances(lances);
-
 
       // System.out.println("Você deseja comprar ou vender?");
       // user.setStatus(valor.next());
@@ -58,7 +56,7 @@ public class Cliente {
       //
       // if(status.equals("S")){
       //   do {
-      //     ArrayList clientes = inter.retornaClientes();
+      //     ArrayList<Usuario> clientes = inter.retornaClientes();
       //
       //     core.mostraClientes(clientes);
       //
@@ -72,8 +70,8 @@ public class Cliente {
       //   System.out.println("Cliente Cadastrado");
       // }
 
-    }catch (Exception e) {
-      System.out.println("ERROR: "+ e);
+    } catch (Exception e) {
+      System.out.println("ERROR: " + e);
     }
 
   }
