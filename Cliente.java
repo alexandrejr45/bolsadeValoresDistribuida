@@ -18,6 +18,7 @@ public class Cliente {
       String status = null;
       String verifica = null;
 
+      System.out.println("Qual o seu nome? ");
       user.setNome(valor.next());
 
       System.out.println("Qual o seu saldo atual? ");
