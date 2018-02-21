@@ -19,10 +19,12 @@ public class Cliente {
       String verifica = null;
 
       System.out.println("Qual o seu nome? ");
-      user.setNome(valor.next());
+      user.setNome(valor.nextLine());
 
       System.out.println("Qual o seu saldo atual? ");
       user.setSaldo(valor.nextDouble());
+
+      user.geraHash();
 
       System.out.println("Procurando objeto cadastro no servidor...");
 
@@ -46,29 +48,34 @@ public class Cliente {
       } while (verifica.equals("Sim"));
 
       ArrayList<Lance> lances = inter.retornaLancesUsuario(user);
-      core.mostraLances(lances);
+      if(lances.isEmpty()){
+        core.mostraLances(lances);        
+      }else{
+        System.out.println("Somente o seus lances foram cadastrados no momento");
+      }
+        
 
-      // System.out.println("Você deseja comprar ou vender?");
-      // user.setStatus(valor.next());
+  //     System.out.println("Você deseja comprar ou vender?");
+  //     user.setStatus(valor.next());
 
-      // System.out.println("Você deseja buscar clientes?");
-      // status = valor.next();
-      //
-      // if(status.equals("S")){
-      //   do {
-      //     ArrayList<Usuario> clientes = inter.retornaClientes();
-      //
-      //     core.mostraClientes(clientes);
-      //
-      //     System.out.println("Você deseja buscar clientes?");
-      //     status = valor.next();
-      //
-      //   } while (status.equals("S"));
-      // }
-      //
-      // if(resposta == true){
-      //   System.out.println("Cliente Cadastrado");
-      // }
+  //     System.out.println("Você deseja buscar clientes?");
+  //     status = valor.next();
+      
+  //     if(status.equals("S")){
+  //       do {
+  //         ArrayList<Usuario> clientes = inter.retornaClientes();
+      
+  //         core.mostraClientes(clientes);
+      
+  //         System.out.println("Você deseja buscar clientes?");
+  //         status = valor.next();
+      
+  //       } while (status.equals("S"));
+  //     }
+      
+  //     if(resposta == true){
+  //       System.out.println("Cliente Cadastrado");
+  //     }
 
     } catch (Exception e) {
       System.out.println("ERROR: " + e);

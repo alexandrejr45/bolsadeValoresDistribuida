@@ -5,7 +5,6 @@ import java.rmi.*;
 public class Usuario implements Serializable {
 
   private String nome;
-  private double lance;
   private double saldo;
   private String status;
   private int idade;
@@ -26,14 +25,6 @@ public class Usuario implements Serializable {
 
   public String getNome() {
     return this.nome;
-  }
-
-  public void setLance(Double lance) {
-    this.lance = lance;
-  }
-
-  public Double getLance() {
-    return this.lance;
   }
 
   public void setSaldo(Double saldo) {
@@ -57,6 +48,29 @@ public class Usuario implements Serializable {
   public int getHash() {
 
     return this.hash;
+  }
+
+  @Override
+  public int hashCode() {
+    //deve ser o mesmo resultado para um mesmo objeto, não pode ser aleatório
+    return this.hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    //se nao forem objetos da mesma classe sao objetos diferentes
+    if (!(obj instanceof Usuario))
+      return false;
+
+    //se forem o mesmo objeto, retorna true
+    if (obj == this)
+      return true;
+
+    // aqui o cast é seguro por causa do teste feito acima
+    Usuario usuario = (Usuario) obj;
+
+    //aqui você compara a seu gosto, o ideal é comparar atributo por atributo
+    return this.hash == usuario.getHash() && this.nome.equals(usuario.getNome());
   }
 
 }

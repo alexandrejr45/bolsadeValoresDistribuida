@@ -72,7 +72,9 @@ public class Servidor extends UnicastRemoteObject implements Interface {
       } else {
         return lista;
       }
-
+    } catch (NullPointerException e) {
+      e.printStackTrace();
+      return null;
     } catch (Exception e) {
       e.printStackTrace();
       return null;

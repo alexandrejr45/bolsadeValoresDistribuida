@@ -74,35 +74,44 @@ public class Corretora implements Serializable {
     ArrayList<Usuario> listaFinal2 = new ArrayList<Usuario>();
     Usuario myUser = null;
 
-    Lance p;
-    Usuario u;
+    try {
 
-    for (int j = 0; j < listaUsuarios.size(); j++) {
+      Lance p;
+      Usuario u;
 
-      u = listaUsuarios.get(j);
+      for (int j = 0; j < listaUsuarios.size(); j++) {
 
-      if (u.getHash() != usuario.getHash()) {
-        listaFinal2.add(u);
-      } else {
-        myUser = u;
-      }
+        u = listaUsuarios.get(j);
 
-    }
-
-    for (int i = 0; i < lances.size(); i++) {
-
-      p = lances.get(i);
-
-      if (p.getUsuario() != myUser) {
-        if (p.getValor() <= usuario.getSaldo()) {
-          listaFinal.add(p);
+        if (u.getHash() != usuario.getHash()) {
+          listaFinal2.add(u);
+        } else {
+          myUser = u;
         }
 
       }
 
-    }
+      for (int i = 0; i < lances.size(); i++) {
 
-    return listaFinal;
+        p = lances.get(i);
+
+        if (!myUser.equals(p.getUsuario())) {
+          if (p.getValor() <= usuario.getSaldo()) {
+            listaFinal.add(p);
+          }
+        }
+
+      }
+      if (listaFinal.isEmpty()) {
+        return listaFinal;
+      } else {
+        return null;
+      }
+
+    } catch (Exception e) {
+      e.printStackTraces(e);
+      return null;
+    }
 
   }
 
