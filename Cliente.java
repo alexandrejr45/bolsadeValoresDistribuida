@@ -47,7 +47,8 @@ public class Cliente {
 
       } while (verifica.equals("Sim"));
 
-      
+      ArrayList<Lance> lances = inter.retornaLancesUsuario(user);
+      core.mostraLances(lances);
         
 
   //     System.out.println("Você deseja comprar ou vender?");

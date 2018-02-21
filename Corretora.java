@@ -103,13 +103,12 @@ public class Corretora implements Serializable {
 
       }
       if (listaFinal.isEmpty()) {
-        return listaFinal;
-      } else {
         return null;
+      } else {
+       return listaFinal;
       }
 
     } catch (Exception e) {
-      e.printStackTraces(e);
       return null;
     }
 

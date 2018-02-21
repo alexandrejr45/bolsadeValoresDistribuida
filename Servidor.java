@@ -67,14 +67,7 @@ public class Servidor extends UnicastRemoteObject implements Interface {
     try {
       lista = corretora.retornaLancesSaldo(user);
 
-      if (lista.isEmpty()) {
-        return null;
-      } else {
-        return lista;
-      }
-    } catch (NullPointerException e) {
-      e.printStackTrace();
-      return null;
+      return lista;
     } catch (Exception e) {
       e.printStackTrace();
       return null;
