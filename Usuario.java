@@ -1,19 +1,20 @@
-import java.io.*;
-import java.util.*;
-import java.rmi.*;
+  import java.io.*;
+  import java.util.*;
+  import java.rmi.*;
 
 
-public class Usuario implements Serializable {
+  public class Usuario implements Serializable {
 
     private String nome;
     private double lance;
     private double saldo;
     private String status;
     private int idade;
+    private Random gerador = new Random();
 
 
     public void setStatus(String status){
-       this.status = status;
+        this.status = status;
     }
 
     public String getStatus(){
@@ -44,5 +45,14 @@ public class Usuario implements Serializable {
       return this.saldo;
     }
 
+    public int geraHash(){
+      g = this.gerador;
+      
+      int valor = g.nextInt();
 
-}
+      return valor;
+
+    }
+
+
+  }

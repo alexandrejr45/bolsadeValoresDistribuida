@@ -1,17 +1,17 @@
-    import java.lang.*;
-    import java.io.*;
-    import java.util.*;
-
+import java.lang.*;
+import java.io.*;
+import java.util.*;
+import java.lang.String;
 import javax.swing.*;
-    import java.rmi.*;
-    import java.rmi.server.*;
+import java.rmi.*;
+import java.rmi.server.*;
 
-    public class Servidor extends UnicastRemoteObject implements Interface{
-    public Servidor() throws RemoteException { super(); };
+public class Servidor2 extends UnicastRemoteObject implements Interface{
+  public Servidor2() throws RemoteException { super(); };
 
-    private Corretora corretora = Corretora.getInstancia();
+  private Corretora corretora = Corretora.getInstancia();
 
-    public boolean registraCliente(Usuario cliente) throws RemoteException{
+  public boolean registraCliente(Usuario cliente) throws RemoteException{
     System.out.println("Servidor recebeu uma chamada para registrar um Cliente");
 
     try{
@@ -26,9 +26,9 @@ import javax.swing.*;
       e.printStackTrace();
       return false;
     }
-    }
+}
 
-    public ArrayList retornaClientes() throws RemoteException{
+  public ArrayList retornaClientes() throws RemoteException{
     System.out.println("Servidor recebeu uma chamada para listar os clientes");
 
     try{
@@ -39,9 +39,9 @@ import javax.swing.*;
       return null;
     }
 
-    }
+  }
 
-    public boolean registrarLance(Lance lance) throws RemoteException{
+  public boolean registrarLance(Lance lance) throws RemoteException{
     System.out.println("Servidor recebeu uma chamada para registrar um Lance");
 
     try{
@@ -56,28 +56,21 @@ import javax.swing.*;
       e.printStackTrace();
       return false;
     }
-    }
+  }
 
-    public ArrayList<Lance> retornaLancesUsuario(Usuario user) throws RemoteException{
+  public ArrayList<Lance> retornaLancesUsuario(Usuario user) throws RemoteException{
       System.out.println("Servidor recebeu uma chamada para listar os lances ");
-      ArrayList<Lance> lista = new ArrayList<>();
 
       try{
-        lista = corretora.retornaLancesSaldo(user);
-
-        if(lista.isEmpty()){
-          return null;
-        }else{
-          return lista;        
-        }
+          return corretora.retornaLancesSaldo(user);
 
       }catch (Exception e) {
         e.printStackTrace();
         return null;
       }
-    }
+  }
 
-    public static void main(String args[]) {
+  public static void main(String args[]) {
 
     try{
       System.out.println("Criando o objeto servidor...");
@@ -92,5 +85,5 @@ import javax.swing.*;
     System.out.println("Pronto para receber chamadas RMI...");
 
 
-    }
+  }
 }

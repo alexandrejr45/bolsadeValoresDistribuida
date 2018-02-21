@@ -69,19 +69,37 @@
       public ArrayList<Lance> retornaLancesSaldo(Usuario usuario){
         ArrayList<Lance> listaFinal = new ArrayList<Lance>();
         ArrayList<Lance> lances = retornaLances();
+        ArrayLisy<Usuario> listaUsuarios = retornaLista();
+        ArrayList<Usuario> listaFinal2 = new ArrayList<>();
+
         Lance p;
+        
+        for(int j = 0; j < listaUsuarios.size(); j++){
+
+          u = (Usuario) listaUsuarios.get(j);
+
+          if(u.getNome(j) != usuario.getNome()){
+
+          }
+
+        }
+
 
 
         for(int i = 0; i < lances.size(); i++){
+          
           p = (Lance) lances.get(i);
+         
           if(p.getValor() <= usuario.getSaldo()){
             listaFinal.add(p);
           }
+            
+          
         }
 
         return listaFinal;
 
       }
 
-    
-  }
+}
+  
