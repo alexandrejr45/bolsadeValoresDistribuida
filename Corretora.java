@@ -78,13 +78,11 @@
 
           u = (Usuario) listaUsuarios.get(j);
 
-          if(u.getNome(j) != usuario.getNome()){
-
+          if(u.getHash() != usuario.getHash()){
+              listaFinal2.add(u);
           }
 
         }
-
-
 
         for(int i = 0; i < lances.size(); i++){
           
