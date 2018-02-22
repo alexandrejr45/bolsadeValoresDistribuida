@@ -48,6 +48,7 @@ public class Corretora implements Serializable {
     for (int i = 0; i < lances.size(); i++) {
       p = lances.get(i);
       System.out.println("--------------------------------------------");
+      System.out.println("Nº = " + (i + 1));
       System.out.println("Lance do Usuario = " + p.getUsuario().getNome());
       System.out.println("Valor do Lance = " + p.getValor());
 
@@ -56,7 +57,6 @@ public class Corretora implements Serializable {
 
   public boolean adicionarLance(Lance lance) {
     if (lance != null) {
-      
 
       lances.add(lance);
       return true;
@@ -67,6 +67,35 @@ public class Corretora implements Serializable {
 
   public ArrayList<Lance> retornaLances() {
     return lances;
+  }
+
+  public boolean comprarLance(Usuario user, Lance lance, int indiceLance) {
+    ArrayList<Lance> lances = retornaLances();
+    Lance l;
+
+    indiceLance = indiceLance - 1;
+
+    l = lances.get(indiceLance);
+
+    if (l == null) {
+      return false;
+    } else {
+      if (lance.getValor() >= l.getValor()) {
+        double novoSaldoComprador = user.getSaldo() - lance.getValor();
+        double novoSaldoVendedor = l.getUsuario().getSaldo() + lance.getValor();
+
+        user.setSaldo(novoSaldoComprador);
+        l.getUsuario().setSaldo(novoSaldoVendedor);
+
+        lances.remove(indiceLance);
+
+        return true;
+      } else {
+        return false;
+      }
+
+    }
+
   }
 
   public ArrayList<Lance> retornaLancesSaldo(Usuario usuario) {
@@ -107,7 +136,7 @@ public class Corretora implements Serializable {
       if (listaFinal.isEmpty()) {
         return null;
       } else {
-       return listaFinal;
+        return listaFinal;
       }
 
     } catch (Exception e) {

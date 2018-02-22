@@ -2,8 +2,6 @@ import java.lang.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.text.AbstractDocument.BranchElement;
-
 import java.rmi.*;
 import java.rmi.server.RemoteObject;
 
@@ -27,7 +25,7 @@ public class Menu {
 
     public static Interface lookup(String objeto) throws Exception {
 
-        Interface inter = (Interface) Naming.lookup("rmi://127.0.0.1/" + objeto);
+        Interface inter = (Interface) Naming.lookup("rmi:///" + objeto);
 
         return inter;
     }
@@ -74,8 +72,34 @@ public class Menu {
 
     }
 
-    public static void altera() {
+    public static void altera() throws Exception{
+        System.out.println("----- Alteração de Cadastro -----");
+        Scanner valor = new Scanner(System.in);
+        String[] args = null;
+        String resposta = null;
 
+
+        if (usuarioBackup == null) {
+            System.out.println("É preciso ter um cadastro para acessar essa opção");
+        } else {
+            System.out.println("Nome " + usuarioBackup.getNome());
+            System.out.println("Saldo " + usuarioBackup.getSaldo());
+
+            System.out.println("Digite sim para alterar seu nome");
+            resposta = valor.next();
+
+            if(resposta.equals("sim") || resposta.equals("Sim")){
+                System.out.println("Digite um novo nome ");
+                usuarioBackup.setNome(valor.next());
+
+                System.out.println("Seu novo nome é " + usuarioBackup.getNome());
+
+                main(args);
+
+            }else{
+                main(args);
+            }
+        }
     }
 
     public static void lista() throws NotBoundException, RemoteException {
@@ -90,17 +114,18 @@ public class Menu {
 
     }
 
-    public static void compra() throws NotBoundException, RemoteException, Exception{
+    public static void compra() throws NotBoundException, RemoteException, Exception {
         System.out.println("----- Lances para comprar -----");
 
         Scanner valor = new Scanner(System.in);
         double valorLance = 0;
+        int indiceLance = 0;
         String[] args = null;
 
         if (usuarioBackup == null) {
             System.out.println("Faça seu cadastro para comprar um lance");
         } else {
-            
+
             System.out.println("Qual o valor do seu lance? ");
             valorLance = valor.nextDouble();
 
@@ -109,6 +134,17 @@ public class Menu {
 
             ArrayList<Lance> lances = principal.retornaLancesUsuario(usuarioBackup);
             core.mostraLances(lances);
+
+            System.out.println("Qual lance você deseja comprar? ");
+            indiceLance = valor.nextInt();
+
+            boolean respostaCompra = principal.comprarLance(usuarioBackup, lance, indiceLance);
+
+            if (respostaCompra == true) {
+                System.out.println("Lance comprado com sucesso");
+            } else {
+                System.out.println("Erro ao comprar Lance");
+            }
 
             main(args);
 

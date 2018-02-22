@@ -1,5 +1,8 @@
 import java.io.*;
 import java.util.*;
+
+
+
 import java.rmi.*;
 
 public class Usuario implements Serializable {
@@ -13,7 +16,7 @@ public class Usuario implements Serializable {
   public void setStatus(String status) {
     this.status = status;
   }
-
+  
   public String getStatus() {
     return this.status;
   }

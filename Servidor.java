@@ -58,6 +58,21 @@ public class Servidor extends UnicastRemoteObject implements Interface {
       return false;
     }
   }
+  public boolean comprarLance(Usuario user, Lance lance, int indiceLance) throws RemoteException {
+    System.out.println("Servidor recebeu uma chamada para comprar um Lance");
+
+    try {
+      if (corretora.comprarLance(user,lance, indiceLance)) {
+        System.out.println("Lance comprado com sucesso");
+        return true;
+      } else {
+        return false;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+  }
 
   public ArrayList<Lance> retornaLancesUsuario(Usuario user) throws RemoteException {
     System.out.println("Servidor recebeu uma chamada para listar os lances ");
@@ -72,6 +87,9 @@ public class Servidor extends UnicastRemoteObject implements Interface {
       return null;
     }
   }
+
+  
+
 
   public static void main(String args[]) {
 
