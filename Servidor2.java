@@ -4,7 +4,9 @@ import java.util.*;
 import java.lang.String;
 import javax.swing.*;
 import java.rmi.*;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.*;
+import java.rmi.registry.Registry;
 
 public class Servidor2 extends UnicastRemoteObject implements Interface {
   public Servidor2() throws RemoteException {
@@ -93,10 +95,12 @@ public class Servidor2 extends UnicastRemoteObject implements Interface {
   public static void main(String args[]) {
 
     try {
+      Registry registry2 = Registro.criaRegistro(2230);
+
       System.out.println("Criando o objeto servidor...");
       Servidor2 servidor2 = new Servidor2(); // cria um objeto
       System.out.println("Conectando o objeto cadastro no Registry...");
-      Naming.rebind("rmi:///cadastro", servidor2); // registra o objeto forn como "produto"
+      registry2.rebind("cadastro2", servidor2); // registra o objeto forn como "produto"
 
     } catch (Exception e) {
       System.out.println("Servidor.main: " + e);

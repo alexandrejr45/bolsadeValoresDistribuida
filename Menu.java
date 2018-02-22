@@ -3,7 +3,9 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 import java.rmi.*;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.RemoteObject;
+import java.rmi.registry.Registry;
 
 public class Menu {
     public Menu() throws RemoteException {
@@ -24,8 +26,9 @@ public class Menu {
     }
 
     public static Interface lookup(String objeto) throws Exception {
+        Registry registry = Registro.getRegistro(3230);
 
-        Interface inter = (Interface) Naming.lookup("rmi:///" + objeto);
+        Interface inter = (Interface) registry.lookup(objeto);
 
         return inter;
     }
@@ -56,7 +59,7 @@ public class Menu {
 
         user.geraHash();
 
-        if (principal == null) {
+        if(principal == null){
             principal = lookup("cadastro");
         }
 
@@ -71,12 +74,11 @@ public class Menu {
 
     }
 
-    public static void altera() throws Exception{
+    public static void altera() throws Exception {
         System.out.println("----- Alteração de Cadastro -----");
         Scanner valor = new Scanner(System.in);
         String[] args = null;
         String resposta = null;
-
 
         if (usuarioBackup == null) {
             System.out.println("É preciso ter um cadastro para acessar essa opção");
@@ -87,7 +89,7 @@ public class Menu {
             System.out.println("Digite sim para alterar seu nome");
             resposta = valor.next();
 
-            if(resposta.equals("sim") || resposta.equals("Sim")){
+            if (resposta.equals("sim") || resposta.equals("Sim")) {
                 System.out.println("Digite um novo nome ");
                 usuarioBackup.setNome(valor.next());
 
@@ -95,7 +97,7 @@ public class Menu {
 
                 main(args);
 
-            }else{
+            } else {
                 main(args);
             }
         }
@@ -139,12 +141,10 @@ public class Menu {
 
             boolean respostaCompra = principal.comprarLance(lance, indiceLance);
 
-
             if (respostaCompra == true) {
                 double saldo = usuarioBackup.getSaldo() - lance.getValor();
                 usuarioBackup.setSaldo(saldo);
 
-    
                 System.out.println("Lance comprado com sucesso");
             } else {
                 System.out.println("Erro ao comprar Lance");
@@ -211,11 +211,24 @@ public class Menu {
         } catch (NotBoundException e) {
             System.out.println("Erro no servidor");
             System.out.println("Procurando objeto no outro servidor");
+            
+            System.out.println("Servidor fora do ar");
+            System.out.println("Buscando outro");
+        
+            Registry registry2 = Registro.getRegistro(2230);
+
+            Interface inter = (Interface) registry2.lookup("cadastro2");
+            principal = (Interface) inter;
+
+            main(args);
 
         } catch (ConnectException e) {
             System.out.println("Servidor fora do ar");
             System.out.println("Buscando outro");
-            principal = (Interface) Naming.lookup("rmi:///cadastro");
+
+            Registry registry2 = Registro.getRegistro(2230);
+            Interface inter = (Interface) registry2.lookup("cadastro2");
+            principal = (Interface) inter;
             main(args);
 
         } catch (NullPointerException e) {
