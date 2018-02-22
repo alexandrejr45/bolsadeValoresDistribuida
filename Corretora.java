@@ -56,6 +56,8 @@ public class Corretora implements Serializable {
 
   public boolean adicionarLance(Lance lance) {
     if (lance != null) {
+      
+
       lances.add(lance);
       return true;
     } else {

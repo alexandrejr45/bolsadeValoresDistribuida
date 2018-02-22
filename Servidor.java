@@ -1,7 +1,6 @@
 import java.lang.*;
 import java.io.*;
 import java.util.*;
-
 import javax.swing.*;
 import java.rmi.*;
 import java.rmi.server.*;
@@ -80,7 +79,7 @@ public class Servidor extends UnicastRemoteObject implements Interface {
       System.out.println("Criando o objeto servidor...");
       Servidor servidor = new Servidor(); // cria um objeto
       System.out.println("Conectando o objeto cadastro no Registry...");
-      Naming.rebind("rmi:///cadastro", servidor); // registra o objeto forn como "produto"
+      Naming.rebind("rmi:///cadastro", servidor); // registra o objeto servidor como "cadastro"
 
     } catch (Exception e) {
       System.out.println("Servidor.main: " + e);
