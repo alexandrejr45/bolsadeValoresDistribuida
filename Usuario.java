@@ -1,8 +1,5 @@
 import java.io.*;
 import java.util.*;
-
-
-
 import java.rmi.*;
 
 public class Usuario implements Serializable {

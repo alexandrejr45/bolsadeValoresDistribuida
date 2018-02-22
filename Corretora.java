@@ -69,31 +69,25 @@ public class Corretora implements Serializable {
     return lances;
   }
 
-  public boolean comprarLance(Usuario user, Lance lance, int indiceLance) {
+  public boolean comprarLance(Lance lance, int indiceLance) {
     ArrayList<Lance> lances = retornaLances();
     Lance l;
 
     indiceLance = indiceLance - 1;
 
     l = lances.get(indiceLance);
+    Usuario u = (Usuario) l.getUsuario();
 
-    if (l == null) {
-      return false;
+    if (lance.getValor() >= l.getValor()) {
+      Double novoSaldoVendedor = u.getSaldo() + lance.getValor();
+
+      l.getUsuario().setSaldo(novoSaldoVendedor);
+
+      lances.remove(indiceLance);
+
+      return true;
     } else {
-      if (lance.getValor() >= l.getValor()) {
-        double novoSaldoComprador = user.getSaldo() - lance.getValor();
-        double novoSaldoVendedor = l.getUsuario().getSaldo() + lance.getValor();
-
-        user.setSaldo(novoSaldoComprador);
-        l.getUsuario().setSaldo(novoSaldoVendedor);
-
-        lances.remove(indiceLance);
-
-        return true;
-      } else {
-        return false;
-      }
-
+      return false;
     }
 
   }

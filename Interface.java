@@ -18,6 +18,6 @@ public interface Interface extends Remote{
     public ArrayList<Lance> retornaLancesUsuario(Usuario user)
     throws java.rmi.RemoteException;
 
-    public boolean comprarLance(Usuario user, Lance lance, int indiceLance)
+    public boolean comprarLance(Lance lance, int indiceLance)
     throws RemoteException;
 }

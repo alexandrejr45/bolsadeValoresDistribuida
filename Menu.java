@@ -36,9 +36,8 @@ public class Menu {
         System.out.println("1. Cadastro do Cliente");
         System.out.println("2. Alterar Cadastro");
         System.out.println("3. Lista de Lances");
-        System.out.println("4. Compra");
-        System.out.println("5. Venda");
-        System.out.println("6. Limpar a Tela");
+        System.out.println("4. Compra/Venda");
+        System.out.println("5. Limpar a Tela");
         System.out.println("Opcao:");
     }
 
@@ -138,9 +137,14 @@ public class Menu {
             System.out.println("Qual lance você deseja comprar? ");
             indiceLance = valor.nextInt();
 
-            boolean respostaCompra = principal.comprarLance(usuarioBackup, lance, indiceLance);
+            boolean respostaCompra = principal.comprarLance(lance, indiceLance);
+
 
             if (respostaCompra == true) {
+                double saldo = usuarioBackup.getSaldo() - lance.getValor();
+                usuarioBackup.setSaldo(saldo);
+
+    
                 System.out.println("Lance comprado com sucesso");
             } else {
                 System.out.println("Erro ao comprar Lance");

@@ -58,11 +58,11 @@ public class Servidor extends UnicastRemoteObject implements Interface {
       return false;
     }
   }
-  public boolean comprarLance(Usuario user, Lance lance, int indiceLance) throws RemoteException {
+  public boolean comprarLance(Lance lance, int indiceLance) throws RemoteException {
     System.out.println("Servidor recebeu uma chamada para comprar um Lance");
 
     try {
-      if (corretora.comprarLance(user,lance, indiceLance)) {
+      if (corretora.comprarLance(lance, indiceLance)) {
         System.out.println("Lance comprado com sucesso");
         return true;
       } else {
